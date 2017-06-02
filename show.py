@@ -20,20 +20,13 @@ class MyMplCanvas(FigureCanvas):
     def __init__(self, parent=None, width=5, height=4, dpi=100):
         fig = Figure(figsize=(width, height), dpi=dpi)
         fig,self.axes = plt.subplots()
-        # 每次plot()调用的时候，我们希望原来的坐标轴被清除(所以False)
-
-
         self.compute_initial_figure()
-
-        #
         FigureCanvas.__init__(self, fig)
         self.setParent(parent)
-
         FigureCanvas.setSizePolicy(self,
                                    QSizePolicy.Expanding,
                                    QSizePolicy.Expanding)
         FigureCanvas.updateGeometry(self)
-
     def compute_initial_figure(self):
         pass
 
@@ -43,7 +36,6 @@ class MyStaticMplCanvas(MyMplCanvas):
         a=tushare.get_hist_data('000002',start='2017-05-22',end='2017-05-31')
         t=a.open
         s=[datetime.strptime(d, '%Y-%m-%d').date() for d in a.index]
-
         self.axes.plot(s,t)
 
 
